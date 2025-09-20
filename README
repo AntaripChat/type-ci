@@ -1,0 +1,133 @@
+TypeScript CI Project
+This is a simple TypeScript project set up with Continuous Integration (CI) using GitHub Actions. The project demonstrates basic TypeScript usage, including variables and interfaces, and is configured to compile and run in a Node.js environment.
+Project Structure
+type-ci/
+├── src/
+│   └── app.ts           # TypeScript source code
+├── .github/
+│   └── workflows/
+│       └── ci.yml       # GitHub Actions CI workflow
+├── dist/
+│   └── app.js           # Compiled JavaScript output
+├── package.json         # Project metadata and scripts
+├── tsconfig.json        # TypeScript configuration
+└── README.md            # Project documentation
+
+Prerequisites
+
+Node.js: Version 20 or higher
+TypeScript: Installed via npm
+Git: For version control
+
+Setup
+
+Clone the Repository:
+git clone https://github.com/AntaripChat/type-ci.git
+cd type-ci
+
+
+Install Dependencies:
+npm install
+
+
+
+Usage
+
+Write TypeScript Code:
+
+The main code is in src/app.ts. Example:let x: number = 5;
+let y: number = 10;
+x = x + y;
+console.log(x); // Outputs 15
+
+
+Optional: Use interfaces for structured data:export interface Calculation {
+  x: number;
+  y: number;
+}
+
+export function addNumbers(calc: Calculation): number {
+  return calc.x + calc.y;
+}
+
+let calc: Calculation = { x: 5, y: 10 };
+let result = addNumbers(calc);
+console.log(result); // Outputs 15
+
+
+
+
+Compile TypeScript:
+npm run build
+
+
+This runs tsc to compile src/app.ts to dist/app.js.
+
+
+Run the Project:
+npm run start
+
+
+This runs node dist/app.js, outputting the result (e.g., 15).
+
+
+
+Continuous Integration
+
+A GitHub Actions workflow (.github/workflows/ci.yml) runs on pushes and pull requests to the main and new branches.
+It performs:
+Dependency installation (npm install)
+Type checking (npx tsc --noEmit)
+Compilation (npm run build)
+
+
+Check CI status in the GitHub Actions tab.
+
+Development
+
+Add Tests (optional):
+
+Install Jest:npm install jest @types/jest ts-jest --save-dev
+
+
+Configure Jest in jest.config.js:module.exports = {
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  roots: ['<rootDir>/src'],
+  testMatch: ['**/*.test.ts']
+};
+
+
+Update package.json scripts:"scripts": {
+  "build": "tsc",
+  "start": "node dist/app.js",
+  "test": "jest"
+}
+
+
+Add tests in src/app.test.ts and update CI to run npm run test.
+
+
+Avoid Common Errors:
+
+TS2451 (Redeclaration): Ensure no duplicate let or const declarations.
+TS6231 (File Not Found): Verify src/app.ts exists and is included in tsconfig.json.
+
+
+
+Contributing
+
+Create a new branch:git checkout -b feature-branch
+
+
+Make changes, commit, and push:git add .
+git commit -m "Describe changes"
+git push origin feature-branch
+
+
+Create a pull request on GitHub.
+
+License
+This project is licensed under the ISC License. See the package.json for details.
+Contact
+For issues, open a ticket at https://github.com/AntaripChat/type-ci/issues.
